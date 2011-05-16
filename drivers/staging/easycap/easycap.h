@@ -69,7 +69,6 @@
 #include <linux/fs.h>
 #include <linux/delay.h>
 #include <linux/types.h>
-#include <linux/smp_lock.h>
 
 #ifndef CONFIG_EASYCAP_OSS
 #include <linux/vmalloc.h>
