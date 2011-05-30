@@ -477,14 +477,16 @@ static void hci_setup_event_mask(struct hci_dev *hdev)
 	 * command otherwise */
 	u8 events[8] = { 0xff, 0xff, 0xfb, 0xff, 0x00, 0x00, 0x00, 0x00 };
 
-	/* Events for 1.2 and newer controllers */
-	if (hdev->lmp_ver > 1) {
-		events[4] |= 0x01; /* Flow Specification Complete */
-		events[4] |= 0x02; /* Inquiry Result with RSSI */
-		events[4] |= 0x04; /* Read Remote Extended Features Complete */
-		events[5] |= 0x08; /* Synchronous Connection Complete */
-		events[5] |= 0x10; /* Synchronous Connection Changed */
-	}
+	/* CSR 1.1 dongles does not accept any bitfield so don't try to set
+	 * any event mask for pre 1.2 devices */
+	if (hdev->lmp_ver <= 1)
+		return;
+
+	events[4] |= 0x01; /* Flow Specification Complete */
+	events[4] |= 0x02; /* Inquiry Result with RSSI */
+	events[4] |= 0x04; /* Read Remote Extended Features Complete */
+	events[5] |= 0x08; /* Synchronous Connection Complete */
+	events[5] |= 0x10; /* Synchronous Connection Changed */
 
 	if (hdev->features[3] & LMP_RSSI_INQ)
 		events[4] |= 0x04; /* Inquiry Result with RSSI */
@@ -837,6 +839,33 @@ static void hci_cc_read_local_oob_data_reply(struct hci_dev *hdev,
 
 	mgmt_read_local_oob_data_reply_complete(hdev->id, rp->hash,
 						rp->randomizer, rp->status);
+}
+
+static void hci_cc_le_set_scan_enable(struct hci_dev *hdev,
+					struct sk_buff *skb)
+{
+	struct hci_cp_le_set_scan_enable *cp;
+	__u8 status = *((__u8 *) skb->data);
+
+	BT_DBG("%s status 0x%x", hdev->name, status);
+
+	if (status)
+		return;
+
+	cp = hci_sent_cmd_data(hdev, HCI_OP_LE_SET_SCAN_ENABLE);
+	if (!cp)
+		return;
+
+	hci_dev_lock(hdev);
+
+	if (cp->enable == 0x01) {
+		del_timer(&hdev->adv_timer);
+		hci_adv_entries_clear(hdev);
+	} else if (cp->enable == 0x00) {
+		mod_timer(&hdev->adv_timer, jiffies + ADV_CLEAR_TIMEOUT);
+	}
+
+	hci_dev_unlock(hdev);
 }
 
 static inline void hci_cs_inquiry(struct hci_dev *hdev, __u8 status)
@@ -1814,6 +1843,10 @@ static inline void hci_cmd_complete_evt(struct hci_dev *hdev, struct sk_buff *sk
 		hci_cc_user_confirm_neg_reply(hdev, skb);
 		break;
 
+	case HCI_OP_LE_SET_SCAN_ENABLE:
+		hci_cc_le_set_scan_enable(hdev, skb);
+		break;
+
 	default:
 		BT_DBG("%s opcode 0x%x", hdev->name, opcode);
 		break;
@@ -2680,6 +2713,27 @@ unlock:
 	hci_dev_unlock(hdev);
 }
 
+static inline void hci_le_adv_report_evt(struct hci_dev *hdev,
+						struct sk_buff *skb)
+{
+	struct hci_ev_le_advertising_info *ev;
+	u8 num_reports;
+
+	num_reports = skb->data[0];
+	ev = (void *) &skb->data[1];
+
+	hci_dev_lock(hdev);
+
+	hci_add_adv_entry(hdev, ev);
+
+	while (--num_reports) {
+		ev = (void *) (ev->data + ev->length + 1);
+		hci_add_adv_entry(hdev, ev);
+	}
+
+	hci_dev_unlock(hdev);
+}
+
 static inline void hci_le_meta_evt(struct hci_dev *hdev, struct sk_buff *skb)
 {
 	struct hci_ev_le_meta *le_ev = (void *) skb->data;
@@ -2689,6 +2743,10 @@ static inline void hci_le_meta_evt(struct hci_dev *hdev, struct sk_buff *skb)
 	switch (le_ev->subevent) {
 	case HCI_EV_LE_CONN_COMPLETE:
 		hci_le_conn_complete_evt(hdev, skb);
+		break;
+
+	case HCI_EV_LE_ADVERTISING_REPORT:
+		hci_le_adv_report_evt(hdev, skb);
 		break;
 
 	default:
