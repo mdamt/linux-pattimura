@@ -15,7 +15,7 @@ while (<LOGS>) {
 		next;
 	}
 
-	m|\s*UBUNTU: (Ubuntu-2\.6\..*)| or next;
+	m|\s*BLANKON: (BlankOn-3\.0\..*)| or next;
 
 	$tag = $1;
 
