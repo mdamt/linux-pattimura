@@ -1,3 +1,11 @@
+linux (2.6.99-1.1) pattimura; urgency=low
+
+  [ Mohammad Anwari]
+
+  * Release 3.0.0rc1
+
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Tue, 31 May 2011 10:02:42 +0000
+
 linux (2.6.38-7.39) natty; urgency=low
 
   [ Leann Ogasawara ]
