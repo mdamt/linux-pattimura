@@ -363,7 +363,6 @@ endif
 
 # Use LINUXINCLUDE when you must reference the include/ directory.
 # Needed to be compatible with the O= option
-LINUXINCLUDE    := -I$(srctree)/arch/$(hdr-arch)/include \
 LINUXINCLUDE    := $(UBUNTUINCLUDE) -I$(srctree)/arch/$(hdr-arch)/include -Iinclude \
                    -Iarch/$(hdr-arch)/include/generated -Iinclude \
                    $(if $(KBUILD_SRC), -I$(srctree)/include) \
