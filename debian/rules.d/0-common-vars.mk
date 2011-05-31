@@ -75,9 +75,9 @@ prev_abinum	:= $(shell echo $(prev_revision) | sed -e 's/\..*//')$(abi_suffix)
 abi_release	:= $(release)-$(abinum)
 
 uploadnum	:= $(shell echo $(revision) | sed -e 's/.*\.//')
-ifneq ($(full_build),false)
-  uploadnum	:= $(uploadnum)-BlankOn
-endif
+#ifneq ($(full_build),false)
+#  uploadnum	:= $(uploadnum)-BlankOn
+#endif
 
 # XXX: linux-libc-dev got bumped to -803.N inadvertantly by a ti-omap4 upload
 #      shift our version higher for this package only.  Ensure this only
@@ -217,7 +217,7 @@ kmake = make ARCH=$(build_arch) \
 	CROSS_COMPILE=$(CROSS_COMPILE) \
 	EXTRAVERSION=-$(abinum)-$(target_flavour) \
 	CONFIG_DEBUG_SECTION_MISMATCH=y SUBLEVEL=$(SUBLEVEL) \
-	KBUILD_BUILD_VERSION="$(uploadnum)" \
+	KBUILD_BUILD_VERSION="$(uploadnum)-BlankOn" \
 	LOCALVERSION= localver-extra=
 ifneq ($(LOCAL_ENV_CC),)
 kmake += CC=$(LOCAL_ENV_CC) DISTCC_HOSTS=$(LOCAL_ENV_DISTCC_HOSTS)
