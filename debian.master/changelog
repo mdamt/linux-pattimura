@@ -1,3 +1,11 @@
+linux (2.6.99-1.1) pattimura; urgency=low
+
+  [Mohammad Anwari]
+
+  * Release 3.0.0rc1
+
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Tue, 31 May 2011 08:15:39 +0300
+
 linux (2.6.39-3.10) oneiric; urgency=low
 
   [ Colin Ian King ]
