@@ -1,3 +1,11 @@
+linux (3.0.0-1.rc2~1) pattimura; urgency=low
+
+  [ Mohammad Anwari]
+
+  * Release 3.0rc2
+
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Mon, 06 Jun 2011 21:28:05 +0000
+
 linux (3.0.0-1.rc1~1) pattimura; urgency=low
 
   [ Mohammad Anwari]
