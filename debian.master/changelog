@@ -1,3 +1,236 @@
+linux (3.0.0-1.rc3~2) pattimura; urgency=low
+
+  [ Mohammad Anwari]
+
+  * Release 3.0rc3~2
+  * Added AppArmor kernel patches
+
+  [ Upstream Kernel Changes ]
+  * isofs: fix bh leak in isofs_fill_super() error case
+  * hwmon: (s3c) Initialize sysfs attributes
+  * hwmon: (ibmpex) Initialize sysfs attributes
+  * hwmon: (ibmaem) Initialize sysfs attributes
+  * hwmon: (asus_atk0110) Consolidate sysfs attribute initialization
+  * hwmon: (coretemp) Drop unused struct members
+  * mm: avoid anon_vma_chain allocation under anon_vma lock
+  * mm: avoid repeated anon_vma lock/unlock sequences in unlink_anon_vmas()
+  * mm: avoid repeated anon_vma lock/unlock sequences in anon_vma_clone()
+  * drm/i915: Fix gen6 (SNB) missed BLT ring interrupts.
+  * KEYS/DNS: Fix ____call_usermodehelper() to not lose the session keyring
+  * spi/bfin_spi: fix handling of default bits per word setting
+  * ALSA: hda - Fix no NID error with VIA codecs
+  * ALSA: isight: adjust for new queueing API
+  * drm/radeon/kms: use helper functions for fence read/write
+  * drm/radeon/kms: set DP link config properly for DP bridges
+  * drm/radeon/kms/atom: AdjustPixelClock fixes for DP bridges
+  * drm/radeon/kms: fix handling of DP to LVDS bridges
+  * drm/radeon/kms: issue blank/unblank commands for ext encoders
+  * drm/radeon/kms: fix support for DDC on dp bridges
+  * drm/radeon/kms: add support for load detection on dp bridges
+  * drm/radeon/kms: add missing external encoder action
+  * drm/radeon/kms: rework atombios_get_encoder_mode()
+  * drm/radeon/kms: fix num crtcs for Cedar and Caicos
+  * Revert "drm/i915: Enable GMBUS for post-gen2 chipsets"
+  * migrate: don't account swapcache as shmem
+  * [CPUFREQ] powernow-k8: Don't try to transition if the pstate is incorrect
+  * [CPUFREQ] powernow-k8: Don't notify of successful transition if we failed (vid case).
+  * [CPUFREQ] Don't set stat->last_index to -1 if the pol->cur has incorrect value.
+  * ALSA: 6fire - Fix signedness bug
+  * xfs: make log devices with write back caches work
+  * AFS: Use i_generation not i_version for the vnode uniquifier
+  * AFS: Set s_id in the superblock to the volume name
+  * vfs: Fix data corruption after failed write in __block_write_begin()
+  * afs: afs_fill_page reads too much, or wrong data
+  * staging: fix iio builds when IIO_RING_BUFFER is not enabled
+  * VFS: Fix vfsmount overput on simultaneous automount
+  * fix wrong iput on d_inode introduced by e6bc45d65d
+  * gpio: add GPIOF_ values regardless on kconfig settings
+  * gpio: include linux/gpio.h where needed
+  * gpio/omap4: Fix missing interrupts during device wakeup due to IOPAD.
+  * Revert "HID: magicmouse: ignore 'ivalid report id' while switching modes"
+  * mm: get rid of the most spurious find_vma_prev() users
+  * drivers/gpu/drm: use printk_ratelimited instead of printk_ratelimit
+  * drm/radeon: workaround a hw bug on some radeon chipsets with all-0 EDIDs.
+  * drm: make debug levels match in edid failure code.
+  * drm/radeon/kms: clear wb memory by default
+  * drm/radeon/kms: be more pedantic about the g5 quirk (v2)
+  * drm/radeon/kms: signed fix for evergreen thermal
+  * drm: populate irq_by_busid-member for pci
+  * sh: sh7724: Add USBHS DMAEngine support
+  * sh: ecovec: Add renesas_usbhs support
+  * Revert "fs/exec.c: use BUILD_BUG_ON for VM_STACK_FLAGS & VM_STACK_INCOMPLETE_SETUP"
+  * Documentation: fix cgroup typos and formatting
+  * Documentation: update cgroupfs mount point
+  * Documentation: update kmemleak supported archs
+  * Documentation: update printk-formats.txt
+  * alpha: fix several security issues
+  * drivers/misc/apds990x.c: apds990x_chip_on() should depend on CONFIG_PM || CONFIG_PM_RUNTIME
+  * ksm: fix NULL pointer dereference in scan_get_next_rmap_item()
+  * rtc: fix build warnings in defconfigs
+  * drivers/tty/serial/pch_uart.c: don't oops if dmi_get_system_info returns NULL
+  * drivers/char/hpet.c: fix periodic-emulation for delayed interrupts
+  * Documentation/feature-removal-schedule.txt: remove ns_cgroup from feature-removal-schedule.txt
+  * mm: compaction: abort compaction if too many pages are isolated and caller is asynchronous V2
+  * mm: vmscan: do not use page_count without a page pin
+  * mm: compaction: ensure that the compaction free scanner does not move to the next zone
+  * compaction: checks correct fragmentation index
+  * mm/memory-failure.c: fix page isolated count mismatch
+  * gcov: disable CONFIG_CONSTRUCTORS when not needed by CONFIG_GCOV_KERNEL
+  * MAINTAINERS: add entry for legacy eeprom driver
+  * memcg: avoid percpu cached charge draining at softlimit
+  * memcg: fix percpu cached charge draining frequency
+  * memcg: fix wrong check of noswap with softlimit
+  * memcg: clear mm->owner when last possible owner leaves
+  * memcg: fix init_page_cgroup nid with sparsemem
+  * mm: memory.numa_stat: fix file permission
+  * leds: fix the incorrect display in menuconfig
+  * mm: fix negative commitlimit when gigantic hugepages are allocated
+  * mm/memory_hotplug.c: fix building of node hotplug zonelist
+  * init/calibrate.c: remove annoying printk
+  * w1: W1_MASTER_DS1WM should depend on GENERIC_HARDIRQS
+  * include/asm-generic/pgtable.h: fix unbalanced parenthesis
+  * MAINTAINERS: add videobuf2 maintainers
+  * leds: move LEDS_GPIO_REGISTER out of menuconfig NEW_LEDS
+  * drivers/leds/leds-asic3: make LEDS_ASIC3 depend on LEDS_CLASS
+  * MAINTAINERS: Balbir has moved
+  * uts: make default hostname configurable, rather than always using "(none)"
+  * BUILD_BUG_ON_ZERO: fix sparse breakage
+  * mm: compaction: fix special case -1 order checks
+  * mm: fix wrong kunmap_atomic() pointer
+  * drivers/misc/cs5535-mfgpt.c: fix wrong if condition
+  * drivers/misc/spear13xx_pcie_gadget.c: fix a memory leak in spear_pcie_gadget_probe error path
+  * mm: increase RECLAIM_DISTANCE to 30
+  * checkpatch: add warning for uses of printk_ratelimit
+  * kmsg_dump.h: fix build when CONFIG_PRINTK is disabled
+  * memcg: add documentation for the memory.numastat API
+  * vmscan: implement swap token priority aging
+  * vmscan: implement swap token trace
+  * vmscan,memcg: memcg aware swap token
+  * drivers/video/backlight/adp8870_bl.c: add missed props.type conversion
+  * backlight: new driver for the ADP8870 backlight devices
+  * fs/exec.c: use BUILD_BUG_ON for VM_STACK_FLAGS & VM_STACK_INCOMPLETE_SETUP
+  * lib/bitmap.c: fix kernel-doc notation
+  * mm/memory.c: fix kernel-doc notation
+  * mm: remove khugepaged double thp vmstat update with CONFIG_NUMA=n
+  * proc: Fix Oops on stat of /proc/<zombie pid>/ns/net
+  * kbuild: Call depmod.sh via shell
+  * perf: clear out make flags when calling kernel make kernelver
+  * ALSA: lola - Fix section mismatch
+  * sched: Check if lowest_mask is initialized in find_lowest_rq()
+  * sched: Fix need_resched() when checking peempt
+  * ARM: mach-shmobile: mackerel: tidyup usbhs driver settings
+  * fbdev: sh_mobile_hdmi: fix regression: statically enable RTPM
+  * signal.c: fix kernel-doc notation
+  * x86 idle: APM requires pm_idle/default_idle unconditionally when a module
+  * SELinux: skip file_name_trans_write() when policy downgraded.
+  * [CIFS] update cifs version to 1.73
+  * xfs: fix ->mknod() return value on xfs_get_acl() failure
+  * [CIFS] trivial cleanup fscache cFYI and cERROR messages
+  * OMAP1: PM: register notifiers with generic clock ops even when !PM_RUNTIME
+  * avr32, exec: remove redundant set_fs(USER_DS)
+  * avr32: make intc_resume() return void to conform to syscore_ops
+  * avr32: add some more at91 to cpu.h definition
+  * avr32: set CONFIG_CC_OPTIMIZE_FOR_SIZE=y for all defconfigs
+  * avr32/at32ap: fix mapping of platform device id for USART
+  * avr32: fix use of non-existing portnr variable in at32_map_usart()
+  * fbdev/atyfb: Fix 2 defined-but-not-used warnings
+  * efifb: Fix call to wrong unregister function
+  * sh, exec: remove redundant set_fs(USER_DS)
+  * drivers: sh: resume enabled clocks fix
+  * ALSA: hda - Fix missing static inline to beep dummy function
+  * ARM: mach-shmobile: Correct SCIF port types for SH7367.
+  * ARM: mach-shmobile: sh73a0 gic_arch_extn.irq_set_wake() fix
+  * ARM: mach-shmobile: Mackerel USB platform data update
+  * ARM: mach-shmobile: AG5EVM SDHI1 platform data update
+  * dmaengine: shdma: SH_DMAC_MAX_CHANNELS message fix
+  * ALSA: 6fire: Fix double-free bug in usb6fire_fw_ezusb_upload()
+  * TOMOYO: Fix oops in tomoyo_mount_acl().
+  * md/raid5: remove unusual use of bio_iovec_idx()
+  * md/raid5: fix FUA request handling in ops_run_io()
+  * md/raid5: fix raid5_set_bi_hw_segments
+  * m68k: use kernel processor defines for conditional optimizations
+  * m68knommu: create config options for CPU classes
+  * m68knommu: fix linker script exported name sections
+  * drm: Compare only lower 32 bits of framebuffer map offsets
+  * drm/i915: Don't leak in i915_gem_shmem_pread_slow()
+  * drm/radeon/kms: do bounds checking for 3D_LOAD_VBPNTR and bump array limit
+  * drm/radeon/kms: fix mac g5 quirk
+  * x86/uv/x2apic: update for change in pci bridge handling.
+  * alpha, drm: Remove obsolete Alpha support in MGA DRM code
+  * alpha/drm: Cleanup Alpha support in DRM generic code
+  * savage: remove unnecessary if statement
+  * cifs: correctly handle NULL tcon pointer in CIFSTCon
+  * cifs: show sec= option in /proc/mounts
+  * cifs: don't allow cifs_reconnect to exit with NULL socket pointer
+  * CIFS: Fix sparse error
+  * omap: pandora: fix NAND support
+  * ALSA: hda - Fix beep_device compilation warnings
+  * ALSA: hda - Fix wrong auto-mute type for Acer Aspire-one
+  * HID: hid-multitouch: fix broken eGalax
+  * Delay struct net freeing while there's a sysfs instance refering to it
+  * afs: fix sget() races, close leak on umount
+  * ubifs: fix sget races
+  * ubifs: split allocation of ubifs_info into a separate function
+  * fix leak in proc_set_super()
+  * [CPUFREQ] Remove cpufreq_stats sysfs entries on module unload.
+  * MAINTAINERS: Update CPU FREQUENCY patterns
+  * ALSA: emu10k1: Add details for E-mu 0404 PCIe version
+  * ALSA: hdspm - Add firmware revision ID for RME MADI PCI version
+  * ALSA: hdspm - Fix jumping external wordclock frequency in AutoSync mode
+  * ALSA: hdspm - Fix locking in snd_hdspm_midi_input_read
+  * ARM: footbridge: fix clock event support
+  * ARM: footbridge: fix debug macros
+  * ARM: initrd: disable initrds outside of memory
+  * ARM: extend Code: line by one 16-bit quantity for Thumb instructions
+  * ARM: 6955/1: cmpxchg syscall should data abort if page not write
+  * ARM: 6954/1: zImage: fix Thumb2 breakage
+  * ARM: 6953/1: DT: don't try to access physical address zero
+  * ARM: 6949/2: mach-u300: fix compilaton warning in IO accessors
+  * Revert "ARM: 6944/1: mm: allow ASID 0 to be allocated to tasks"
+  * Revert "ARM: 6943/1: mm: use TTBR1 instead of reserved context ID"
+  * video: s3c-fb: move enabling channel for window
+  * video: s3c-fb: fix virtual resolution checking
+  * video: s3c-fb: fix misleading kfree in remove function
+  * drm/radeon: fix GUI idle IH debug statements
+  * drm/radeon/kms: check modes against max pixel clock
+  * drm: fix fbs in DRM_IOCTL_MODE_GETRESOURCES ioctl
+  * md:Documentation/md.txt - fix typo
+  * md/bitmap: remove unused fields from struct bitmap
+  * md/bitmap: use proper accessor macro
+  * md: check ->hot_remove_disk when removing disk
+  * md: Using poll  /proc/mdstat can monitor the events of adding a spare disks
+  * MD: use is_power_of_2 macro
+  * MD: raid5 do not set fullsync
+  * MD: support initial bitmap creation in-kernel
+  * davinci: make PCM platform devices static
+  * arm: davinci: Fix fallout from generic irq chip conversion
+  * sh: Fix up xchg/cmpxchg corruption with gUSA RB.
+  * MD: add sync_super to mddev_t struct
+  * MD: raid1 changes to allow use by device mapper
+  * MD: move thread wakeups into resume
+  * MD: possible typo
+  * MD: no sync IO while suspended
+  * MD: no integrity register if no gendisk
+  * HID: MAINTAINERS: Update USB HID/HIDBP DRIVERS pattern
+  * HID: hid-multitouch: add support for Chunghwa multi-touch panel
+  * OMAP: PM: omap_device: fix device power domain callbacks
+  * OMAP: PM debug: fix section mismatch warnings
+  * ARM: 6894/1: mmci: trigger card detect IRQs on falling and rising edges
+  * ARM: 6952/1: fix lockdep warning of "unannotated irqs-off"
+  * ARM: 6951/1: include .bss in memory layout information
+  * ARM: 6948/1: Fix .size directives for __arm{7,9}tdmi_proc_info
+  * ARM: 6947/2: mach-u300: fix compilation error in timer
+  * ARM: 6946/1: vexpress: move v2m clock init to init_early
+  * sh: Remove compressed kernel libgcc dependency.
+  * ARM: mx51/sdma: Check the chip revision in run-time
+  * arm: mxs: include asm/processor.h for cpu_relax()
+  * sh: fix wrong icache/dcache address-array start addr in cache-debugfs.
+  * selinux: fix case of names with whitespace/multibytes on /selinux/create
+  * HID: hiddev: fix use after free in hiddev_release
+  * HID: add quirk for HyperPen 10000U
+  * HID: hiddev: fix potential use-after-free
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Sun, 19 Jun 2011 09:55:29 +0300
+
 linux (3.0.0-1.rc3~1) pattimura; urgency=low
 
   [ Mohammad Anwari]
