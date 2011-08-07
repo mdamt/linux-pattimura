@@ -1,3 +1,12 @@
+linux (3.0.1-2.1) pattimura; urgency=low
+
+  [ Mohammad Anwari]
+
+  * Release 3.0.1-2.1
+  * Fallback to old version numbering
+
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Sun, 07 Aug 2011 10:23:06 +0000
+
 linux (3.0.1-1blankon1) pattimura; urgency=low
 
   [ Mohammad Anwari]
