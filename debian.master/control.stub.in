@@ -15,7 +15,7 @@ Provides: SRCPKGNAME-source, SRCPKGNAME-source-3.0
 Depends: ${misc:Depends}, binutils, bzip2, coreutils | fileutils (>= 4.0)
 Recommends: libc-dev, gcc, make
 Suggests: libncurses-dev | ncurses-dev, kernel-package, libqt3-dev
-Description: Linux kernel source for version PKGVER with Ubuntu patches
+Description: Linux kernel source for version PKGVER with BlankOn patches
  This package provides the source code for the Linux kernel version
  PKGVER.
  .
