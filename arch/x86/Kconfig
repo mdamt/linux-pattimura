@@ -2170,7 +2170,7 @@ source "net/Kconfig"
 
 source "drivers/Kconfig"
 
-source "ubuntu/Kconfig"
+source "blankon/Kconfig"
 
 source "drivers/firmware/Kconfig"
 

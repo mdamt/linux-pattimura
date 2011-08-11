@@ -356,20 +356,20 @@ CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 # Prefer linux-backports-modules
 ifneq ($(KBUILD_SRC),)
-ifneq ($(shell if test -e $(KBUILD_OUTPUT)/ubuntu-build; then echo yes; fi),yes)
-UBUNTUINCLUDE := -I/usr/src/linux-headers-lbm-$(KERNELRELEASE)
+ifneq ($(shell if test -e $(KBUILD_OUTPUT)/blankon-build; then echo yes; fi),yes)
+BLANKONINCLUDE := -I/usr/src/linux-headers-lbm-$(KERNELRELEASE)
 endif
 endif
 
 # Use LINUXINCLUDE when you must reference the include/ directory.
 # Needed to be compatible with the O= option
-LINUXINCLUDE    := $(UBUNTUINCLUDE) -I$(srctree)/arch/$(hdr-arch)/include -Iinclude \
+LINUXINCLUDE    := $(BLANKONINCLUDE) -I$(srctree)/arch/$(hdr-arch)/include -Iinclude \
                    -Iarch/$(hdr-arch)/include/generated -Iinclude \
                    $(if $(KBUILD_SRC), -I$(srctree)/include) \
                    -include include/generated/autoconf.h
 
-# UBUNTU: Include our third party driver stuff too
-LINUXINCLUDE   += -Iubuntu/include $(if $(KBUILD_SRC),-I$(srctree)/ubuntu/include)
+# BLANKON: Include our third party driver stuff too
+LINUXINCLUDE   += -Iblankon/include $(if $(KBUILD_SRC),-I$(srctree)/blankon/include)
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
@@ -516,7 +516,7 @@ scripts: scripts_basic include/config/auto.conf include/config/tristate.conf
 
 # Objects we will link into vmlinux / subdirs we need to visit
 init-y		:= init/
-drivers-y	:= drivers/ sound/ firmware/ ubuntu/
+drivers-y	:= drivers/ sound/ firmware/ blankon/
 net-y		:= net/
 libs-y		:= lib/
 core-y		:= usr/
