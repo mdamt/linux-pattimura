@@ -1,3 +1,12 @@
+linux (3.0.1-3.0) pattimura; urgency=low
+
+  [ Mohammad Anwari]
+
+  * Release 3.0.1-2.1
+  * CVE-2012-0056
+
+ -- Mohammad Anwari <mdamt@di.blankon.in>  Wed, 25 Jan 2012 09:59:54 +0200
+
 linux (3.0.1-2.1) pattimura; urgency=low
 
   [ Mohammad Anwari]
